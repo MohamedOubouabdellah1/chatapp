@@ -2,7 +2,10 @@ const path = require("path");
 const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
+const createAdapter = require("@socket.io/redis-adapter").createAdapter;
+const redis = require("redis");
 const formatMessage = require("./utils/messages");
+const { createClient } = redis;
 const {
   userJoin,
   getCurrentUser,
@@ -19,7 +22,12 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const botName = "misterBot";
 
-
+(async () => {
+  pubClient = createClient({ url: "redis://127.0.0.1:6379" });
+  await pubClient.connect();
+  subClient = pubClient.duplicate();
+  io.adapter(createAdapter(pubClient, subClient));
+})();
 // Run when client connects
 io.on("connection", (socket) => {
   socket.on("joinRoom", ({ username, room }) => {
