@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const botName = "misterBot";
 
 (async () => {
-  pubClient = createClient({ url: "redis://127.0.0.1:6379" });
+  pubClient = createClient({ url: "https://chatsectiondlala.herokuapp.com/" });
   await pubClient.connect();
   subClient = pubClient.duplicate();
   io.adapter(createAdapter(pubClient, subClient));
