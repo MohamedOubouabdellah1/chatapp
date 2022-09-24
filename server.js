@@ -1,4 +1,5 @@
 const path = require("path");
+const https = require("node:https");
 const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
@@ -14,12 +15,12 @@ const {
 } = require("./utils/users");
 
 const app = express();
-const server = http.createServer(app);
+const server = https.createServer(app);
 const io = socketio(server);
 
 // Set static folder 
 app.use(express.static(path.join(__dirname, "public")));
-app.use('/',express.static("index.html"));
+app.use('/',express.static("https://we-codes.com/chat/index.html"));
 const botName = "ChatCord Bot";
 // Run when client connects
 io.on("connection", (socket) => {
