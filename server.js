@@ -17,8 +17,8 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-// Set static folder
-app.use(express.static("/home/ruafbwuf/chatapp/public"));
+// Set static folder 
+app.use(express.static(path.join(__dirname, "public")));
 app.use('/',express.static("index.html"));
 const botName = "ChatCord Bot";
 // Run when client connects
