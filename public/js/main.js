@@ -7,7 +7,7 @@ const userList = document.getElementById('users');
 const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
-const link = 'https://appchat0test.herokuapp.com/';
+const link = 'https://we-codes.com/chatapp/';
 const socket = io(link);
 
 // Join chatroom
