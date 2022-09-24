@@ -8,7 +8,7 @@ const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
 const link = 'https://we-codes.com/chat/'
-const socket = io(link);
+const socket = io();
 
 // Join chatroom
 socket.emit('joinRoom', { username, room });
