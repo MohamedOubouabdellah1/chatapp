@@ -2,10 +2,10 @@ const path = require("path");
 const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
-const createAdapter = require("@socket.io/redis-adapter").createAdapter;
-const redis = require("redis");
 const formatMessage = require("./utils/messages");
-const { createClient } = redis;
+
+
+require("dotenv").config();
 const {
   userJoin,
   getCurrentUser,
@@ -20,16 +20,10 @@ const io = socketio(server);
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")));
 
-const botName = "misterBot";
-
-(async () => {
-  pubClient = createClient({ url: "https://chatsectiondlala.herokuapp.com/" });
-  await pubClient.connect();
-  subClient = pubClient.duplicate();
-  io.adapter(createAdapter(pubClient, subClient));
-})();
+const botName = "ChatCord Bot";
 // Run when client connects
 io.on("connection", (socket) => {
+  console.log(io.of("/").adapter);
   socket.on("joinRoom", ({ username, room }) => {
     const user = userJoin(socket.id, username, room);
 
