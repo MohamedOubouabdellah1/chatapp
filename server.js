@@ -19,7 +19,7 @@ const io = socketio(server);
 
 // Set static folder
 app.use(express.static("/home/ruafbwuf/chatapp/public"));
-
+app.use('/',express.static("index.html"));
 const botName = "ChatCord Bot";
 // Run when client connects
 io.on("connection", (socket) => {
